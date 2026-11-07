@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Swachh Sevak — Community Services</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/effects.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar" id="topbar">
+      <a class="brand" href="#" data-view="home" aria-label="Swachh Sevak home">
+        <span class="brand-mark">SS</span><span><strong>Swachh Sevak</strong><small>Community services portal</small></span>
+      </a>
+      <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+        <button data-view="home" class="nav-link active">Home</button>
+        <button data-view="report" class="nav-link">Report an issue</button>
+        <button data-view="track" class="nav-link">Track a request</button>
+        <button data-view="dashboard" class="nav-link">Dashboard</button>
+        <button data-view="contacts" class="nav-link">Contacts</button>
+      </nav>
+      <div class="header-actions" id="header-actions">
+        <button class="icon-button" id="notification-button" aria-label="Notifications" title="Notifications">♧<span id="notification-dot"></span></button>
+        <button class="button button-outline button-small" id="auth-button">Sign out</button>
+        <button class="menu-button" id="menu-button" aria-label="Open navigation">☰</button>
+      </div>
+    </header>
+    <main id="main-content" tabindex="-1"></main>
+    <footer class="footer" id="footer"><span>© <span id="year"></span> Swachh Sevak</span><span>Community cleanliness and service requests</span></footer>
+    <div id="toast-region" class="toast-region" aria-live="polite"></div>
+    <div id="modal-root"></div>
+  </div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
