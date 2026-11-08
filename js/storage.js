@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from './settings.js';
+import { STORAGE_KEY,SESSION_KEY } from './settings.js';
 import { uid as makeUid } from './utils.js';
 const seed = {
   user: null,
@@ -16,16 +16,27 @@ const seed = {
 };
 const clone = value => JSON.parse(JSON.stringify(value));
 export function uid() { return makeUid(); }
+function loadSession() {
+  try {
+    const raw=localStorage.getItem(SESSION_KEY);
+    return raw?JSON.parse(raw):null;
+  } catch (e) { console.warn('Session restore failed:',e); return null; }
+}
 export function loadState() {
+  const session=loadSession();
   try {
     const raw=localStorage.getItem(STORAGE_KEY);
-    if (!raw) { localStorage.setItem(STORAGE_KEY,JSON.stringify(seed)); return clone(seed); }
+    if (!raw) { const initial={...clone(seed),user:session}; localStorage.setItem(STORAGE_KEY,JSON.stringify(initial)); return initial; }
     const parsed=JSON.parse(raw);
-    const state={...clone(seed),...parsed,complaints:Array.isArray(parsed.complaints)?parsed.complaints:clone(seed.complaints),notifications:Array.isArray(parsed.notifications)?parsed.notifications:[]};
+    const state={...clone(seed),...parsed,user:session||parsed.user||null,complaints:Array.isArray(parsed.complaints)?parsed.complaints:clone(seed.complaints),notifications:Array.isArray(parsed.notifications)?parsed.notifications:[]};
     const legacyLabel=new RegExp(String.fromCharCode(100,101,109,111),'gi');
     const clean=value=>{if(typeof value==='string')return value.replace(legacyLabel,'sample').replace(/SS-sample-(\d+)/gi,'SS-$1');if(Array.isArray(value))return value.map(clean);if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([key,item])=>[key,clean(item)]));return value;};
     return clean(state);
-  } catch (e) { console.warn('Storage reset:',e); return clone(seed); }
+  } catch (e) { console.warn('Storage reset:',e); return {...clone(seed),user:session}; }
 }
-export function saveState(state) { localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); }
-export function resetState() { localStorage.removeItem(STORAGE_KEY); return loadState(); }
+export function saveState(state) {
+  if(state.user) localStorage.setItem(SESSION_KEY,JSON.stringify(state.user));
+  else localStorage.removeItem(SESSION_KEY);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+}
+export function resetState() { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(SESSION_KEY); return loadState(); }
