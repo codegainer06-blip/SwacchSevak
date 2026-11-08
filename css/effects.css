@@ -1,0 +1,17 @@
+/* Small, consistent feedback keeps the prototype lively without distracting motion. */
+.sample-badge{flex:none;border:1px solid #cce5d4;background:#f1faf4;color:var(--green-dark);border-radius:999px;padding:6px 9px;font-size:9px;font-weight:800;letter-spacing:1px}
+.sample-only{display:inline-flex;align-items:center;border-radius:999px;background:#f3f6f3;color:#65736c;padding:7px 10px;font-size:10px;font-weight:700}
+.nav-link,.button,.icon-button,.menu-button,.card,.stat,.pill,.role-switch button,.small-link,.contact-row,.feature-icon,.hero-orb,.floating-tag{transition:color .18s ease,background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease}
+.nav-link:hover{transform:translateY(-1px)}
+.button:hover,.icon-button:hover,.menu-button:hover,.pill:hover,.role-switch button:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(22,54,37,.11)}
+.card:hover{transform:translateY(-3px);border-color:#d2e8d9;box-shadow:0 12px 28px rgba(22,54,37,.08)}
+.stat:hover{transform:translateY(-2px);border-color:#cfe4d6;box-shadow:0 8px 20px rgba(22,54,37,.06)}
+.card .feature-icon{transition:transform .2s ease,background-color .2s ease}
+.card:hover .feature-icon{transform:scale(1.07) rotate(-3deg);background:#ddf2e4}
+.hero-orb:hover{transform:rotate(-5deg) scale(1.035)}
+.floating-tag:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(22,54,37,.12)}
+.contact-row:hover{padding-left:8px;background:linear-gradient(90deg,#f8fcf9,transparent)}
+tbody tr{transition:background-color .16s ease}
+tbody tr:hover{background:#f7fbf8}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #9dd5b0;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
