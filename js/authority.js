@@ -1,5 +1,0 @@
-import { escapeHTML,formatDate,statusClass } from './utils.js';
-export function renderAuthorityComplaints(state) {
- const list=state.complaints.filter(c=>!['Resolved'].includes(c.status));
- return list.length?`<div class="table-wrap"><table><thead><tr><th>Complaint</th><th>Location</th><th>Age</th><th>Status</th><th>Actions</th></tr></thead><tbody>${list.map(c=>`<tr><td><strong>${escapeHTML(c.title)}</strong><div class="muted">${c.id}</div></td><td>${escapeHTML(c.area)} · ${escapeHTML(c.street)}</td><td>${formatDate(c.createdAt)}</td><td><span class="badge ${statusClass(c.status)}">${c.status}</span></td><td><div class="action-cell"><button class="button button-small" data-assign="${c.id}">${c.assignedTo?'Edit assignment':'Assign'}</button><button class="button button-small button-outline" data-progress="${c.id}">In progress</button><button class="button button-small" data-resolve="${c.id}">Resolve</button></div></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">No open complaints.</div>';
-}
