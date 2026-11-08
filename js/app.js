@@ -8,8 +8,9 @@ import { renderComplaintRecords,renderResolvedRecords,renderOngoingTrackRecords 
 import { renderNotifications,addNotification } from './notifications.js';
 import { escapeHTML,formatDate,statusClass,toast } from './utils.js';
 
-let state=loadState(), currentView='login';
-state.user=null;
+let state=loadState();
+if (!['citizen','authority','admin'].includes(state.user?.role)) state.user=null;
+let currentView=state.user?'dashboard':'login';
 const main=document.querySelector('#main-content');
 const save=()=>saveState(state);
 const getComplaint=id=>state.complaints.find(c=>c.id===id);
