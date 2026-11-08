@@ -8,4 +8,3 @@ export const SAMPLE_ACCOUNTS = [
   { phone:'9000000001', name:'Meera Patel', role:'authority', label:'Corporator / Ward member' },
   { phone:'9000000002', name:'Rohan Iyer', role:'admin', label:'Municipal Administrator' }
 ];
-
